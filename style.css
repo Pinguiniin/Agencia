@@ -1,198 +1,228 @@
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ===========================
+   style.css — Agência Criativa
+   Refatorado com BEM e modular
+   =========================== */
+
+/* -------- Variáveis / temas -------- */
+:root{
+  --bg: #f9f9f9;
+  --text: #333;
+  --muted: #555;
+  --primary: #ff9800;
+  --primary-dark: #e68900;
+  --dark: #222;
+  --white: #ffffff;
+
+  --container-max: 1000px;
+  --radius: 0.8rem;
+  --gap: 1.25rem;
+  --shadow-sm: 0 2px 5px rgba(0,0,0,0.08);
+  --shadow-md: 0 3px 6px rgba(0,0,0,0.12);
+
+  --fs-base: 16px;
 }
 
-body {
-  font-family: Arial, sans-serif;
+/* -------- Reset / Base -------- */
+* { box-sizing: border-box; margin:0; padding:0; }
+html,body { height:100%; }
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--fs-base);
   line-height: 1.6;
-  color: #333;
-  background: #f9f9f9;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing:antialiased;
 }
 
-/* Cabeçalho */
-header {
-  background: #222;
-  color: #fff;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 15px;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: #ff9800;
-}
-
-/* Seções genéricas */
-section {
-  padding: 60px 20px;
-  max-width: 1000px;
-  margin: auto;
-}
-
-section h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #222;
-  text-align: center;
-}
-
-/* Home */
-#home {
-  background: url('banner.jpg') no-repeat center center/cover;
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
-}
-
-#home h1 {
-  font-size: 2.5rem;
-}
-
-#home p {
-  font-size: 1.2rem;
-}
-
-/* Serviços */
-#servicos ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  list-style: none;
-  padding: 0;
-}
-
-#servicos li {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-  text-align: center;
-  font-weight: bold;
-}
-
-/* Depoimentos */
-#depoimentos blockquote {
-  background: #fff;
-  padding: 20px;
-  border-left: 5px solid #ff9800;
-  margin: 20px 0;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-#depoimentos p {
-  font-style: italic;
-}
-
-#depoimentos cite {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-  color: #555;
-}
-
-/* Contato */
-#contato p {
-  margin-bottom: 10px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-form label {
-  font-weight: bold;
-}
-
-form input,
-form textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+/* Container utilitário */
+.container{
   width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-form button {
-  padding: 12px;
-  background: #ff9800;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
+/* Utilitários */
+.text-center { text-align: center; }
+.hidden { display: none !important; }
+
+/* -------- Header / Navegação -------- */
+.header {
+  background: var(--dark);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+}
+.header__brand { display:flex; align-items:center; gap: 0.5rem; }
+.header__logo {
+  font-weight:700;
+  font-size: 1.125rem;
+  letter-spacing: 0.2px;
+}
+.header__toggle {
+  display: none;
+  background: transparent;
+  color: var(--white);
   border: none;
-  border-radius: 5px;
+  font-size: 1.25rem;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-form button:hover {
-  background: #e68900;
+/* Nav */
+.header__nav { }
+.header__list {
+  list-style: none;
+  display:flex;
+  gap: 1rem;
+  align-items:center;
 }
+.header__item { }
+.header__link {
+  color: var(--white);
+  text-decoration: none;
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.5rem;
+  transition: color 0.18s, background 0.18s;
+  display:inline-block;
+}
+.header__link:hover,
+.header__link:focus { color: var(--primary); background: rgba(255,255,255,0.02); outline: none; }
 
-/* Rodapé */
-footer {
+/* -------- Hero (Home) -------- */
+.hero {
+  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('banner.jpg') center/cover no-repeat;
+  color: var(--white);
+  padding: 6rem 0;
   text-align: center;
-  background: #222;
-  color: white;
-  padding: 15px;
-  margin-top: 30px;
+}
+.hero__inner { max-width: 920px; margin: auto; }
+.hero__title { font-size: 2.25rem; margin-bottom: 0.5rem; }
+.hero__subtitle { font-size: 1.125rem; opacity: 0.95; }
+
+/* -------- Seções genéricas -------- */
+section {
+  padding: 4rem 0;
+}
+.section__title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--dark);
 }
 
-/* Responsividade */
+/* -------- About (Sobre) -------- */
+.about__inner { text-align: center; }
+.about__title { composes: section__title; font-size: 1.75rem; margin-bottom: 0.75rem; }
+.about__text { max-width: 820px; margin: 0 auto; color: var(--muted); }
+
+/* -------- Services (Serviços) -------- */
+.services__inner { }
+.services__title { text-align: center; font-size: 1.75rem; margin-bottom: 1.25rem; color: var(--dark); }
+
+.services__list {
+  list-style:none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: var(--gap);
+  padding: 0;
+  margin: 0;
+}
+.services__item {
+  background: var(--white);
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  font-weight: 600;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height: 120px;
+}
+
+/* Card componente (reutilizável) */
+.card {
+  border-radius: var(--radius);
+}
+
+/* -------- Testimonials (Depoimentos) -------- */
+.testimonials__inner { max-width: 900px; margin: auto; display: grid; gap: 1rem; }
+.testimonials__title { text-align:center; font-size:1.75rem; margin-bottom: 1rem; color: var(--dark); }
+.testimonials__item {
+  background: var(--white);
+  padding: 1rem;
+  border-left: 6px solid var(--primary);
+  border-radius: 0.6rem;
+  box-shadow: var(--shadow-sm);
+}
+.testimonials__quote p { font-style: italic; margin-bottom: 0.5rem; }
+.testimonials__author { color: var(--muted); font-weight:700; }
+
+/* -------- Contact (Contato) -------- */
+.contact__inner { max-width: 820px; margin: auto; }
+.contact__title { text-align:center; font-size:1.75rem; margin-bottom: 1rem; color: var(--dark); }
+.contact__info { margin-bottom: 1.25rem; color: var(--muted); }
+.contact__line { margin-bottom: 0.5rem; }
+
+.contact__form { display:flex; flex-direction:column; gap: 0.75rem; }
+.contact__label { font-weight:700; }
+.contact__input {
+  padding: 0.75rem;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 0.5rem;
+  width:100%;
+  background: var(--white);
+  font: inherit;
+}
+.contact__textarea { min-height: 120px; resize: vertical; }
+
+/* Botões */
+.btn { padding: 0.7rem 1rem; border-radius: 0.6rem; border: none; cursor: pointer; font-weight:700; }
+.btn--primary {
+  background: var(--primary);
+  color: var(--white);
+  transition: background 0.2s ease;
+}
+.btn--primary:hover { background: var(--primary-dark); }
+
+/* Footer */
+.footer {
+  background: var(--dark);
+  color: var(--white);
+  padding: 1rem 0;
+  margin-top: 2.5rem;
+}
+.footer__inner { display:flex; align-items:center; justify-content:center; }
+.footer__text { font-size: 0.95rem; }
+
+/* -------- Responsividade -------- */
+@media (max-width: 1024px) {
+  .hero__title { font-size: 2rem; }
+}
+
 @media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
+  .header__list { flex-direction: column; gap: 0.5rem; align-items: center; }
+  .header__toggle { display: inline-block; }
+  .header__nav { display: none; }
+  .header__nav.header__nav--open { display: block; }
 
-  #home h1 {
-    font-size: 2rem;
-  }
-
-  #home p {
-    font-size: 1rem;
-  }
-
-  #servicos ul {
-    grid-template-columns: 1fr;
-  }
+  .hero { padding: 4rem 0; }
+  .hero__title { font-size: 1.75rem; }
+  .services__list { grid-template-columns: 1fr; }
+  .testimonials__inner { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .logo {
-    margin-bottom: 10px;
-  }
-
-  section h2 {
-    font-size: 1.5rem;
-  }
+  .hero__title { font-size: 1.5rem; }
+  .about__text, .contact__info { font-size: 0.95rem; }
+  .header__inner { flex-direction: column; gap: 0.5rem; text-align:center; }
 }
